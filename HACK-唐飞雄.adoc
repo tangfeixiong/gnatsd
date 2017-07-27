@@ -1,5 +1,6 @@
 === How to
 Build
+
 ---
 [vagrant@localhost gnatsd]$ ./build-alpine-docker.sh
 Usage: ./build-alpine-docker.sh [--push]
@@ -46,6 +47,7 @@ Deleted: sha256:9809f7dfb1df17fc86b1e23177131354b79a0b9835c175f0ec1986a38c890e06
 ---
 
 Ship & Run
+
 ---
 [vagrant@localhost gnatsd]$ docker run --rm -ti docker.io/tangfeixiong/gnatsd /gnatsd --version
 nats-server version 1.0.2
