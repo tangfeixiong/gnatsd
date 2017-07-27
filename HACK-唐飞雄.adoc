@@ -1,0 +1,69 @@
+=== How to
+Build
+---
+[vagrant@localhost gnatsd]$ ./build-alpine-docker.sh
+Usage: ./build-alpine-docker.sh [--push]
+github.com/nats-io/gnatsd/conf
+log/syslog
+github.com/nats-io/gnatsd/logger
+github.com/nats-io/gnatsd/server/pse
+github.com/nats-io/gnatsd/util
+github.com/nats-io/gnatsd/vendor/github.com/nats-io/nuid
+github.com/nats-io/gnatsd/vendor/golang.org/x/crypto/blowfish
+internal/pprof/profile
+github.com/nats-io/gnatsd/vendor/golang.org/x/crypto/bcrypt
+runtime/trace
+runtime/pprof/internal/protopprof
+runtime/pprof
+net/http/pprof
+github.com/nats-io/gnatsd/server
+github.com/nats-io/gnatsd
+Sending build context to Docker daemon 9.695 MB
+Step 1 : FROM gliderlabs/alpine
+ ---> 057c472a5d84
+Step 2 : MAINTAINER tangfeixiong <fxtang@qingyuanos.com>
+ ---> Using cache
+ ---> c40c1c707aeb
+Step 3 : RUN apk add --update bash ca-certificates libc6-compat && rm -rf /var/cache/apk/*
+ ---> Using cache
+ ---> d05d60b497d1
+Step 4 : ADD gnatsd seed.conf /
+ ---> Using cache
+ ---> 9855186b83b3
+Step 5 : EXPOSE 4222 8222
+ ---> Using cache
+ ---> 21729d0f2a6c
+Step 6 : CMD /gnatsd -config seed.conf -D -V
+ ---> Using cache
+ ---> 22e0081e097e
+Successfully built 22e0081e097e
+Deleted: sha256:b41f1a8f8dd62845350c841d8f701b91f1e6831ee8ec635075e958442b115f29
+Deleted: sha256:31ef1fb0891467359f91c8f897e3cacfa0d3e3d2035b791a52b7881992d4e565
+Deleted: sha256:6ade32b50f0079292809ca82d7917774f82d821b90b22f93b6b48be04674b227
+Deleted: sha256:30aef4e518e840a3ce305ab7a7df86cbbfba1c701e082c833dc1f11442652dda
+Deleted: sha256:43f50958758382f477670fe9db3735d8c87d2ea112fd86550dc51d9c0ccc024d
+Deleted: sha256:9809f7dfb1df17fc86b1e23177131354b79a0b9835c175f0ec1986a38c890e06
+---
+
+Ship & Run
+---
+[vagrant@localhost gnatsd]$ docker run --rm -ti docker.io/tangfeixiong/gnatsd /gnatsd --version
+nats-server version 1.0.2
+[vagrant@localhost gnatsd]$ docker run -d --name gnatsd docker.io/tangfeixiong/gnatsd /gnatsd
+aa9839fd1358922ddb4193dbd16e4f57788e1b41f7c49d451b6e264986d8512b
+[vagrant@localhost gnatsd]$ docker logs gnatsd
+[1] 2017/07/27 07:44:27.718134 [INF] Starting nats-server version 1.0.2
+[1] 2017/07/27 07:44:27.718645 [INF] Listening for client connections on 0.0.0.0:4222
+[1] 2017/07/27 07:44:27.718666 [INF] Server is ready
+[vagrant@localhost gnatsd]$ docker stop gnatsd
+gnatsd
+[vagrant@localhost gnatsd]$ docker rm gnatsd
+gnatsd
+[vagrant@localhost gnatsd]$ docker push docker.io/tangfeixiong/gnatsd
+The push refers to a repository [docker.io/tangfeixiong/gnatsd]
+2505074dcc04: Pushed 
+ba3f2c32ca67: Pushed 
+5f70bf18a086: Layer already exists 
+64757ea28b1f: Mounted from gliderlabs/alpine 
+latest: digest: sha256:888e6742d808cd0fdb7cf4576bd05d1fde46fe47b776bb5fd6fafc81750b8a9b size: 5060
+---

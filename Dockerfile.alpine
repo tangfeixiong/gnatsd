@@ -1,0 +1,14 @@
+FROM gliderlabs/alpine
+# MAINTAINER tangfeixiong <fxtang@qingyuanos.com>
+LABEL maintainer="tangfeixiong <tangfx128@gmail.com>" \
+    name="gnatsd" \
+    project="https://github.com/tangfeixiong/gnatsd" \
+    community="https://github.com/nats-io/gnatsd"
+
+RUN apk add --update bash ca-certificates libc6-compat && rm -rf /var/cache/apk/*
+
+ADD gnatsd seed.conf  /
+
+EXPOSE 4222 8222
+#ENTRYPOINT ["gnatsd"]
+CMD ["/gnatsd", "-config", "seed.conf", "-D", "-V"]
