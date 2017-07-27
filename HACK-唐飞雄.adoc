@@ -1,7 +1,7 @@
 === How to
 Build
 
----
+----
 [vagrant@localhost gnatsd]$ ./build-alpine-docker.sh
 Usage: ./build-alpine-docker.sh [--push]
 github.com/nats-io/gnatsd/conf
@@ -44,11 +44,11 @@ Deleted: sha256:6ade32b50f0079292809ca82d7917774f82d821b90b22f93b6b48be04674b227
 Deleted: sha256:30aef4e518e840a3ce305ab7a7df86cbbfba1c701e082c833dc1f11442652dda
 Deleted: sha256:43f50958758382f477670fe9db3735d8c87d2ea112fd86550dc51d9c0ccc024d
 Deleted: sha256:9809f7dfb1df17fc86b1e23177131354b79a0b9835c175f0ec1986a38c890e06
----
+----
 
 Ship & Run
 
----
+----
 [vagrant@localhost gnatsd]$ docker run --rm -ti docker.io/tangfeixiong/gnatsd /gnatsd --version
 nats-server version 1.0.2
 [vagrant@localhost gnatsd]$ docker run -d --name gnatsd docker.io/tangfeixiong/gnatsd /gnatsd
@@ -68,4 +68,4 @@ ba3f2c32ca67: Pushed
 5f70bf18a086: Layer already exists 
 64757ea28b1f: Mounted from gliderlabs/alpine 
 latest: digest: sha256:888e6742d808cd0fdb7cf4576bd05d1fde46fe47b776bb5fd6fafc81750b8a9b size: 5060
----
+----
